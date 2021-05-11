@@ -6,14 +6,12 @@ class Category(models.Model):
     class Meta():
         db_table = 'categories'
 
-
 class SubCategory(models.Model):
     name = models.CharField(max_length=30)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
     class Meta():
         db_table = 'sub_categories'
-
 
 class Product(models.Model):
     name           = models.CharField(max_length=30)
@@ -33,7 +31,6 @@ class Product(models.Model):
     class Meta():
         db_table = 'products'
 
-
 class ProductProduct(models.Model):
     product1 = models.ForeignKey('Product', on_delete=models.CASCADE)
     product2 = models.ForeignKey('Product', on_delete=models.CASCADE)
@@ -41,14 +38,12 @@ class ProductProduct(models.Model):
     class Meta():
         db_table = 'products_products'
 
-
 class Character(models.Model):
     name      = models.CharField(max_length=30)
     image_url = models.CharField(max_length=2000)
     
     class Meta():
         db_table = 'characters'
-
 
 class Review(models.Model):
     rating     = models.PositiveSmallIntegerField()
@@ -60,7 +55,6 @@ class Review(models.Model):
     
     class Meta():
         db_table = 'reviews'
-
 
 class Image(models.Model):
     image_blob = models.ImageField(null=True)
@@ -78,7 +72,6 @@ class Option(models.Model):
     class Meta():
         db_table = 'options'
 
-
 class Question(models.Model):
     comments = models.TextField()
     product  = models.ForeignKey('Product', on_delete=models.CASCADE)
@@ -86,14 +79,12 @@ class Question(models.Model):
     class Meta():
         db_table = 'questions'
 
-
 class Answer(models.Model):
     comments = models.TextField()
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
 
     class Meta():
         db_table = 'answers'
-
 
 class OrderList(models.Model):
     quantity = models.PositiveSmallIntegerField()
@@ -103,7 +94,6 @@ class OrderList(models.Model):
     class Meta():
         db_table = 'order_lists'
 
-
 class Order(models.Model):
     reciever_name = models.CharField(max_length=30)
     user          = models.ForeignKey('users.User', on_delete=models.CASCADE)
@@ -112,18 +102,8 @@ class Order(models.Model):
     class Meta():
         db_table = 'orders'
 
-
 class OrderStatus(models.Model):
     status = models.BooleanField()
 
     class Meta():
         db_table = 'order_status'
-
-
-
-
-
-
-
-
-
