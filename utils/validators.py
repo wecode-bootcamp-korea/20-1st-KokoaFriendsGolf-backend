@@ -1,11 +1,15 @@
 from django.core.exceptions import ValidationError
 
+class DuplicatedEntryError(Exception):
+
+    def __init__(self, duplicated_field):
+        super().__init__()
+        self.err_message = f'Entry {duplicated_field} is duplicated.'
 
 def validate_email(email):
 
     if not ("@" in email and "." in email):
         raise ValidationError(f"{email} is not an valid email.")
-
 
 def validate_password(password):
     MIN_PASSWORD_LENGTH = 8
@@ -13,16 +17,16 @@ def validate_password(password):
     if len(str(password)) < MIN_PASSWORD_LENGTH:
         raise ValidationError("Your Password is too short. Use Longer Password.")
 
-class DuplicatedEntryError(Exception):
+def validate_gender(gender):
+    if not gender:
+        return 'N'
 
-    def __init__(self, duplicated_field):
-        super().__init__()
-        self.err_message = f'Entry {duplicated_field} is duplicated.'
+    if gender not in ['M', 'F']:
+        raise ValidationError("Gender Field should be either 'M' or 'F' or empty.")
 
-class AuthenticationError(Exception):
-    pass
+    return gender
 
-def check_duplicate(model, data):
+def validate_duplicate(model, data):
     non_duplicatable_fields = [
         _.attname
         for _ in model._meta.get_fields()

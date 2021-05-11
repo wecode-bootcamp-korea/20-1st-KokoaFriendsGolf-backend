@@ -10,7 +10,7 @@ from django.http            import JsonResponse
 from django.core.exceptions import ValidationError
 
 from users.models           import User
-from utils.validators       import validate_email, validate_password, check_duplicate, DuplicatedEntryError, AuthenticationError
+from utils.validators       import validate_email, validate_password, validate_gender, validate_duplicate, DuplicatedEntryError
 from my_settings            import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_DURATION_SEC
 
 class SignUpView(View):
@@ -22,16 +22,10 @@ class SignUpView(View):
 
             validate_email(data["email"])
             validate_password(data["password"])
-            
-            check_duplicate(User, data)
+            data['gender'] = validate_gender(data.get('gender'))
+            validate_duplicate(User, data)
 
             hashed_password = bcrypt.hashpw(str(data.get('password')).encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-
-            if not data.get('gender'):
-                data['gender'] = 'N'
-
-            if data.get('gender') not in ['M', 'F', 'N']:
-                return JsonResponse({"status": "INVALID_DATA_ERROR", "message": "Gender Field should be either 'M' or 'F' or empty."}, status=422)
 
             user = User.objects.create(
                 email           = data.get('email'),
@@ -42,7 +36,7 @@ class SignUpView(View):
                 gender          = data.get('gender'),
             )
 
-            return JsonResponse({ "status": "SUCCESS", "user": user.to_dict()}, status=200)
+            return JsonResponse({"status": "SUCCESS", "user": user.to_dict()}, status=200)
 
         except JSONDecodeError as e:
             return JsonResponse({"status": "JSON_DECODE_ERROR", "message": e.msg}, status=400)
@@ -54,7 +48,7 @@ class SignUpView(View):
             return JsonResponse({"status": "KEY_ERROR", "message": f'Key Error in Field "{e.args[0]}"'}, status=400)
 
         except DuplicatedEntryError as e:
-            return JsonResponse({"status": "DUPLICATED_ENTRY", "message": e.err_message}, status=409)
+            return JsonResponse({"status": "DUPLICATED_ENTRY_ERROR", "message": e.err_message}, status=409)
 
 class SignInView(View):
 
