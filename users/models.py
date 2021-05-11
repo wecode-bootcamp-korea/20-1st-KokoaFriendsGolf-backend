@@ -39,8 +39,7 @@ class User(models.Model):
 
     gender = models.CharField(
         "user's gender",
-        max_length=1,
-        default='N'
+        max_length=1
     )
 
     class Meta:
