@@ -58,7 +58,7 @@ class Review(models.Model):
         db_table = 'reviews'
 
 class Image(models.Model):
-    image_blob = models.ImageField(null=True)
+    image_url = models.URLField('image url', max_length=2000, null=True)
     review     = models.ForeignKey('Review', on_delete=models.CASCADE)
     
     class Meta():
