@@ -6,19 +6,17 @@ class Category(models.Model):
     class Meta():
         db_table = 'categories'
 
-
 class SubCategory(models.Model):
     name = models.CharField(max_length=30)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
     class Meta():
-        db_table = 'sub_categories'
-
+        db_table = 'subcategories'
 
 class Product(models.Model):
     name           = models.CharField(max_length=30)
     price          = models.DecimalField(max_digits=8, decimal_places=2)
-    thunbnail_url  = models.CharField(max_length=2000)
+    thumbnail_url  = models.CharField(max_length=2000)
     is_new         = models.BooleanField(null=True)
     is_sale        = models.BooleanField(null=True)
     is_soldout     = models.BooleanField(null=True)
@@ -33,7 +31,6 @@ class Product(models.Model):
     class Meta():
         db_table = 'products'
 
-
 class ProductRelation(models.Model):
     reference       = models.ForeignKey('Product', on_delete=models.CASCADE)
     related_product = models.ForeignKey('Product', on_delete=models.CASCADE)
@@ -41,14 +38,12 @@ class ProductRelation(models.Model):
     class Meta():
         db_table = 'product_relations'
 
-
 class Character(models.Model):
     name      = models.CharField(max_length=30)
     image_url = models.CharField(max_length=2000)
     
     class Meta():
         db_table = 'characters'
-
 
 class Review(models.Model):
     rating     = models.PositiveSmallIntegerField()
@@ -60,7 +55,6 @@ class Review(models.Model):
     
     class Meta():
         db_table = 'reviews'
-
 
 class Image(models.Model):
     image_blob = models.ImageField(null=True)
@@ -78,7 +72,6 @@ class Option(models.Model):
     class Meta():
         db_table = 'options'
 
-
 class Question(models.Model):
     comments = models.TextField()
     product  = models.ForeignKey('Product', on_delete=models.CASCADE)
@@ -86,11 +79,9 @@ class Question(models.Model):
     class Meta():
         db_table = 'questions'
 
-
 class Answer(models.Model):
     comments = models.TextField()
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
 
     class Meta():
         db_table = 'answers'
-
