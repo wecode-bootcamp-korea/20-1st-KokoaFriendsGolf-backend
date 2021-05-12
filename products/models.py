@@ -65,9 +65,7 @@ class Image(models.Model):
         db_table = 'images'
 
 class Option(models.Model):
-    name1   = models.CharField(max_length=30)
-    name2   = models.CharField(max_length=30)
-    name3   = models.CharField(max_length=30)
+    name = models.CharField('option name', max_length=30)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
 
     class Meta():
