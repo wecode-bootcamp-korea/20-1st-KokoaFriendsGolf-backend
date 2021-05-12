@@ -23,7 +23,7 @@ class Product(models.Model):
     is_set         = models.BooleanField('set product', null=True)
     is_picked      = models.BooleanField('MD picked product', null=True)
     contents       = models.TextField('product contents') 
-    sub_category   = models.ForeignKey('SubCategory', on_delete=models.CASCADE)
+    subcategory   = models.ForeignKey('SubCategory', on_delete=models.CASCADE)
     character      = models.ForeignKey('Character', on_delete=models.CASCADE)
     discount_ratio = models.DecimalField('discount ratio', max_digits=3, decimal_places=2) 
     created_at     = models.DateTimeField(auto_now_add=True)
