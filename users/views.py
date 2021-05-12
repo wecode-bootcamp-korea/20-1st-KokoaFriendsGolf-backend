@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import time
-=======
->>>>>>> feature/signup
 import bcrypt
 import jwt
 import json
