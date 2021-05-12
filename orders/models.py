@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class OrderList(models.Model):
      quantity = models.PositiveSmallIntegerField()
      product  = models.ForeignKey('Product', on_delete=models.CASCADE)
@@ -9,7 +8,6 @@ class OrderList(models.Model):
      class Meta():
          db_table = 'order_lists'
 
-
 class Order(models.Model):
      reciever_name = models.CharField(max_length=30)
      user          = models.ForeignKey('users.User', on_delete=models.CASCADE)
@@ -17,7 +15,6 @@ class Order(models.Model):
 
      class Meta():
          db_table = 'orders'
-
 
 class OrderStatus(models.Model):
      status = models.BooleanField()
