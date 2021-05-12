@@ -1,32 +1,33 @@
 from django.db import models
 
 class Category(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField('category name', max_length=30)
 
     class Meta():
         db_table = 'categories'
 
 class SubCategory(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField('subcategory name', max_length=30)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
     class Meta():
         db_table = 'subcategories'
 
 class Product(models.Model):
-    name           = models.CharField(max_length=30)
-    price          = models.DecimalField(max_digits=8, decimal_places=2)
-    thumbnail_url  = models.CharField(max_length=2000)
-    is_new         = models.BooleanField(null=True)
-    is_sale        = models.BooleanField(null=True)
-    is_soldout     = models.BooleanField(null=True)
-    is_set         = models.BooleanField(null=True)
-    contents       = models.TextField() 
-    is_picked      = models.BooleanField(default=True, null=True)
-    created_at     = models.DateTimeField(auto_now_add=True)
+    name           = models.CharField('product name', max_length=30)
+    price          = models.DecimalField('product price', max_digits=8, decimal_places=2)
+    thumbnail_url  = models.CharField('product thumbnail URL', max_length=2000)
+    is_new         = models.BooleanField('new product', null=True)
+    is_sale        = models.BooleanField('on sale product', null=True)
+    is_soldout     = models.BooleanField('soldout product', null=True)
+    is_set         = models.BooleanField('set product', null=True)
+    is_picked      = models.BooleanField('MD picked product', null=True)
+    contents       = models.TextField('product contents') 
     sub_category   = models.ForeignKey('SubCategory', on_delete=models.CASCADE)
     character      = models.ForeignKey('Character', on_delete=models.CASCADE)
-    discount_ratio = models.DecimalField(max_digits=8, decimal_places=2) 
+    discount_ratio = models.DecimalField('discount ratio', max_digits=3, decimal_places=2) 
+    created_at     = models.DateTimeField(auto_now_add=True)
+    updated_at     = models.DateTimeField(auto_now=True)
 
     class Meta():
         db_table = 'products'
@@ -39,19 +40,19 @@ class ProductRelation(models.Model):
         db_table = 'product_relations'
 
 class Character(models.Model):
-    name      = models.CharField(max_length=30)
-    image_url = models.CharField(max_length=2000)
+    name      = models.CharField('character name', max_length=30)
+    image_url = models.CharField('character image URL', max_length=2000)
     
     class Meta():
         db_table = 'characters'
 
 class Review(models.Model):
-    rating     = models.PositiveSmallIntegerField()
-    comments   = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    rating     = models.PositiveSmallIntegerField('review rating')
+    comments   = models.TextField('review comments')
     user       = models.ForeignKey('users.User', on_delete=models.CASCADE)
     product    = models.ForeignKey('Product', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     class Meta():
         db_table = 'reviews'
@@ -73,14 +74,14 @@ class Option(models.Model):
         db_table = 'options'
 
 class Question(models.Model):
-    comments = models.TextField()
+    comments = models.TextField('question text')
     product  = models.ForeignKey('Product', on_delete=models.CASCADE)
     
     class Meta():
         db_table = 'questions'
 
 class Answer(models.Model):
-    comments = models.TextField()
+    comments = models.TextField('answer text')
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
 
     class Meta():
