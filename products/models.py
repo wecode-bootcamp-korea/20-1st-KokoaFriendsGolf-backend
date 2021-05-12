@@ -41,7 +41,7 @@ class ProductRelation(models.Model):
 
 class Character(models.Model):
     name      = models.CharField('character name', max_length=30)
-    image_url = models.CharField('character image URL', max_length=2000)
+    image_url = models.URLField('character image URL', max_length=2000)
     
     class Meta():
         db_table = 'characters'
