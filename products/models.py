@@ -34,12 +34,12 @@ class Product(models.Model):
         db_table = 'products'
 
 
-class ProductProduct(models.Model):
-    product1 = models.ForeignKey('Product', on_delete=models.CASCADE)
-    product2 = models.ForeignKey('Product', on_delete=models.CASCADE)
+class ProductRelation(models.Model):
+    reference       = models.ForeignKey('Product', on_delete=models.CASCADE)
+    related_product = models.ForeignKey('Product', on_delete=models.CASCADE)
 
     class Meta():
-        db_table = 'products_products'
+        db_table = 'product_relations'
 
 
 class Character(models.Model):
@@ -93,37 +93,4 @@ class Answer(models.Model):
 
     class Meta():
         db_table = 'answers'
-
-
-class OrderList(models.Model):
-    quantity = models.PositiveSmallIntegerField()
-    product  = models.ForeignKey('Product', on_delete_models.CASCADE)
-    order    = models.ForeignKey('Order', on_delete_models.CASCADE)
-
-    class Meta():
-        db_table = 'order_lists'
-
-
-class Order(models.Model):
-    reciever_name = models.CharField(max_length=30)
-    user          = models.ForeignKey('users.User', on_delete=models.CASCADE)
-    order_status  = models.ForeignKey('OrderStatus', on_delete=models.CASCACDE)
-
-    class Meta():
-        db_table = 'orders'
-
-
-class OrderStatus(models.Model):
-    status = models.BooleanField()
-
-    class Meta():
-        db_table = 'order_status'
-
-
-
-
-
-
-
-
 
