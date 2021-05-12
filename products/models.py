@@ -33,8 +33,8 @@ class Product(models.Model):
         db_table = 'products'
 
 class ProductRelation(models.Model):
-    reference       = models.ForeignKey('Product', on_delete=models.CASCADE)
-    related_product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    reference       = models.ForeignKey('Product', related_name='reference', on_delete=models.CASCADE)
+    related_product = models.ForeignKey('Product', related_name='related_products', on_delete=models.CASCADE)
 
     class Meta():
         db_table = 'product_relations'
