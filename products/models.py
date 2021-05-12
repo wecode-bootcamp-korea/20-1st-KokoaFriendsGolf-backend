@@ -72,15 +72,17 @@ class Option(models.Model):
         db_table = 'options'
 
 class Question(models.Model):
-    comments = models.TextField('question text')
-    product  = models.ForeignKey('Product', on_delete=models.CASCADE)
-    
+    comments    = models.TextField('question text')
+    product     = models.ForeignKey('Product', on_delete=models.CASCADE)
+    created_at  = models.DateTimeField(auto_now_add=True)
+    updated_at  = models.DateTimeField(auto_now=True)
     class Meta():
         db_table = 'questions'
 
 class Answer(models.Model):
-    comments = models.TextField('answer text')
-    question = models.ForeignKey('Question', on_delete=models.CASCADE)
-
+    comments    = models.TextField('answer text')
+    question    = models.ForeignKey('Question', on_delete=models.CASCADE)
+    created_at  = models.DateTimeField(auto_now_add=True)
+    updated_at  = models.DateTimeField(auto_now=True)
     class Meta():
         db_table = 'answers'
