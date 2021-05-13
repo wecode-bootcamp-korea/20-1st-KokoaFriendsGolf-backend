@@ -2,7 +2,7 @@ from django.db import models
 
 class OrderList(models.Model):
      quantity = models.PositiveSmallIntegerField()
-     product  = models.ForeignKey('Product', on_delete=models.CASCADE)
+     product  = models.ForeignKey('products.Product', on_delete=models.CASCADE)
      order    = models.ForeignKey('Order', on_delete=models.CASCADE)
 
      class Meta():
