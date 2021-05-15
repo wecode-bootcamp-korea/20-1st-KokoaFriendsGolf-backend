@@ -32,7 +32,7 @@ class SignUpView(View):
                 gender          = gender,
             )
 
-            return JsonResponse({"status": "SUCCESS", "user": user.to_dict()}, status=200)
+            return JsonResponse({"status": "SUCCESS", "data": {"user": user.to_dict()}}, status=200)
 
         except JSONDecodeError as e:
             return JsonResponse({"status": "JSON_DECODE_ERROR", "message": e.msg}, status=400)
