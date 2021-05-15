@@ -55,8 +55,8 @@ class Product(models.Model):
             "updated_at"    : self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
         }
         
-        return product_info
-
+        return product_info    
+    
 class ProductRelation(models.Model):
     reference       = models.ForeignKey('Product', related_name='reference', on_delete=models.CASCADE)
     related_product = models.ForeignKey('Product', related_name='related_products', on_delete=models.CASCADE)

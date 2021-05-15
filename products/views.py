@@ -2,13 +2,13 @@ from django.views             import View
 from django.http              import JsonResponse
 from django.core.exceptions   import ValidationError
 
-from .models                  import Category, SubCategory, Product, Character
+from .models                  import (Category, SubCategory, Product, Character, 
+                                     Review, Image, Option, Question, Answer)
 
 class ProductListView(View):
     def get(self, request):
         sub_category__id = request.GET.get("scid", 0)
         category__id     = request.GET.get("cid", 0)
-        character__id    = request.GET.get("chr_id", 0)
 
         all_category     = Category.objects.all()
         category_id_list = []
@@ -28,37 +28,61 @@ class ProductListView(View):
             for category_products in category_all:
                 category_products_all = category_products.product_set.all()
                 for category_product in category_products_all:
-                    category_product_information = {
-                        'name'         : category_product.name, 
-                        'price'        : category_product.price,
-                        'thumbnail_url': category_product.thumbnail_url
-                    }
-                    category_products_list.append(category_product_information)
+                    product_info = {
+                       "id"            : category_product.id,
+                       "name"          : category_product.name,
+                       "price"         : float(category_product.price),
+                       "thumbnail_url" : category_product.thumbnail_url,
+                       "is_new"        : False if not category_product.is_new else True,
+                       "is_sale"       : False if not category_product.is_sale else True,
+                       "is_soldout"    : False if not category_product.is_soldout else True,
+                       "is_set"        : False if not category_product.is_set else True,
+                       "discount_ratio": float(category_product.discount_ratio),
+                       "created_at"    : category_product.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                       "updated_at"    : category_product.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+                       }
+                    category_products_list.append(product_info)
             return JsonResponse({"products_list": category_products_list}, status=200)
 
         if int(sub_category__id) in sub_category_id_list:
             sub_category = SubCategory.objects.get(id=sub_category__id)
             sub_category_products = sub_category.product_set.all()
-            products_list = []
-            for product in sub_category_products:
-                product_information = {
-                        'name' : product.name,
-                        'price': product.price,
-                        'thumbnail_url': product.thumbnail_url
-                    }
-                products_list.append(product_information)
-            return JsonResponse({"products_list": products_list}, status=200)
+            sub_category_products_list = []
+            for sub_category_product in sub_category_products:
+                product_info = {
+                 "id"            : sub_category_product.id,
+                 "name"          : sub_category_product.name,
+                 "price"         : float(sub_category_product.price),
+                 "thumbnail_url" : sub_category_product.thumbnail_url,
+                 "is_new"        : False if not sub_category_product.is_new else True,
+                 "is_sale"       : False if not sub_category_product.is_sale else True,
+                 "is_soldout"    : False if not sub_category_product.is_soldout else True,
+                 "is_set"        : False if not sub_category_product.is_set else True,
+                 "discount_ratio": float(sub_category_product.discount_ratio),
+                 "created_at"    : sub_category_product.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                 "updated_at"    : sub_category_product.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+                 }
+                sub_category_products_list.append(product_info)
+            return JsonResponse({"products_list": sub_category_products_list}, status=200)
 
         if category__id == 0 and sub_category__id == 0:
             products = Product.objects.all()
             products_list=[]
             for product in products:
-                product_information = {
-                        'name'         : product.name,
-                        'price'        : product.price,
-                        'thumbnail_url': product.thumbnail_url
-                     }
-                products_list.append(product_information)
+                product_info = {
+                 "id"            : product.id,
+                 "name"          : product.name,
+                 "price"         : float(product.price),
+                 "thumbnail_url" : product.thumbnail_url,
+                 "is_new"        : False if not product.is_new else True,
+                 "is_sale"       : False if not product.is_sale else True,
+                 "is_soldout"    : False if not product.is_soldout else True,
+                 "is_set"        : False if not product.is_set else True,
+                 "discount_ratio": float(product.discount_ratio),
+                 "created_at"    : product.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                 "updated_at"    : product.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+                 } 
+                products_list.append(product_info)
             return JsonResponse({"products_list": products_list}, status=200)
 
         if int(category__id) not in category_id_list or int(sub_category__id) not in sub_category_id_list:
@@ -80,13 +104,25 @@ class CharacterListView(View):
             for one_character in character_all:
                 character_products = one_character.product_set.all()
                 for character_product in character_products:
-                    character_product_information = {
-                                'name'         : character_product.name,
-                                'price'        : character_product.price,
-                                'thumbnail_url': character_product.thumbnail_url
-                            }
-                    character_product_list.append(character_product_information)
+                    product_info = {
+                     "id"            : character_product.id,
+                     "name"          : character_product.name,
+                     "price"         : float(character_product.price),
+                     "thumbnail_url" : character_product.thumbnail_url,
+                     "is_new"        : False if not character_product.is_new else True,
+                     "is_sale"       : False if not character_product.is_sale else True,
+                     "is_soldout"    : False if not character_product.is_soldout else True,
+                     "is_set"        : False if not character_product.is_set else True,
+                     "discount_ratio": float(character_product.discount_ratio),
+                     "created_at"    : character_product.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                     "updated_at"    : character_product.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+                     } 
+                    character_product_list.append(product_info)
             return JsonResponse({"products_list": character_product_list}, status=200)
 
         if int(character__id) not in character_id_list:
             return JsonResponse({"message": "NO CHARACTER ID"}, status=400)
+
+class SortView(View):
+    def get(self, request):
+        pass
