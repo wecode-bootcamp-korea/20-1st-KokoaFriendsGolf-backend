@@ -40,20 +40,20 @@ class DataFactory:
 
     def gen_product(self, product_image_url):
         [ category_eng, subcategory_eng, character_eng, _ ] = product_image_url.split('.')[-2].split('/')[-1].split('-')
-        category_ko                                = ENG_KO[category_eng]
-        subcategory_ko                             = ENG_KO[subcategory_eng]
-        character_ko                               = ENG_KO[character_eng]
-        name                                    = self.get_random_element(PRODUCT_NAME_PREFIX) + " " + subcategory_ko + "-" + character_ko
-        avg_price                               = self.search_data('name', subcategory_ko, self.search_data('name', category_ko, CATEGORY)['subcategory'])['avg_price']
-        price                                   = 1000 * round(random.randint(avg_price*(1-PRICE_VOLATILITY), avg_price*(1+PRICE_VOLATILITY))/1000)
-        thumbnail_url                           = product_image_url
-        is_new                                  = self.get_random_true(NEW_RATE)
-        is_sale                                 = self.get_random_true(SALE_RATE)
-        is_soldout                              = self.get_random_true(SOLDOUT_RATE)
-        is_set                                  = self.get_random_true(SET_RATE)
-        is_picked                               = self.get_random_true(PICKED_RATE)
-        contents                                = DETAIL_CONTENTS[category_eng]
-        discount_ratio                          = 0 if not is_sale else (random.randint(1,5)/10)
+        category_ko                                         = ENG_KO[category_eng]
+        subcategory_ko                                      = ENG_KO[subcategory_eng]
+        character_ko                                        = ENG_KO[character_eng]
+        name                                                = self.get_random_element(PRODUCT_NAME_PREFIX) + " " + subcategory_ko + "-" + character_ko
+        avg_price                                           = self.search_data('name', subcategory_ko, self.search_data('name', category_ko, CATEGORY)['subcategory'])['avg_price']
+        price                                               = 1000 * round(random.randint(avg_price*(1-PRICE_VOLATILITY), avg_price*(1+PRICE_VOLATILITY))/1000)
+        thumbnail_url                                       = product_image_url
+        is_new                                              = self.get_random_true(NEW_RATE)
+        is_sale                                             = self.get_random_true(SALE_RATE)
+        is_soldout                                          = self.get_random_true(SOLDOUT_RATE)
+        is_set                                              = self.get_random_true(SET_RATE)
+        is_picked                                           = self.get_random_true(PICKED_RATE)
+        contents                                            = DETAIL_CONTENTS[category_eng]
+        discount_ratio                                      = 0 if not is_sale else (random.randint(1,5)/10)
 
         return {
             "category"      : category_ko,

@@ -9,7 +9,6 @@ class Command(BaseCommand):
         
     
     def handle(self, *args, **options):
-        
         try:
             num_user = options['num_user']
             
@@ -19,8 +18,8 @@ class Command(BaseCommand):
             self.stdout.write(self.style.NOTICE("Start Generating User Data"))
 
             filepath = "./data/user_mockup_data.csv"
-            factory = DataFactory()
-            users = factory.gen_users(num_users = num_user)
+            factory  = DataFactory()
+            users    = factory.gen_users(num_users = num_user)
             factory.save_to_csv(users, filepath)
 
             self.stdout.write(self.style.SUCCESS("Successfully Generated User Data."))
