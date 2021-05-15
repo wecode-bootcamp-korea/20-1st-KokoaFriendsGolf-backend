@@ -1,17 +1,24 @@
 import csv
 import random
+from faker              import Faker
 
-from faker import Faker
+from django.db          import IntegrityError
 
-from data.mockup_data import CATEGORY, PRODUCT_IMAGES, PRODUCT_NAME_PREFIX, ENG_KO, DETAIL_CONTENTS
-
-USER_NUMBER      = 1000
-NEW_RATE         = 0.05
-SALE_RATE        = 0.1
-SOLDOUT_RATE     = 0.03
-SET_RATE         = 0.01
-PICKED_RATE      = 0.05
-PRICE_VOLATILITY = 0.03
+from data.mockup_data   import (CATEGORY, 
+                                CHARACTERS, 
+                                PRODUCT_IMAGES, 
+                                PRODUCT_NAME_PREFIX, 
+                                ENG_KO, 
+                                DETAIL_CONTENTS,
+                                USER_NUMBER,      
+                                NEW_RATE,         
+                                SALE_RATE,        
+                                SOLDOUT_RATE,     
+                                SET_RATE,         
+                                PICKED_RATE,      
+                                PRICE_VOLATILITY)
+from users.models       import User
+from products.models    import Character, Product, Category, SubCategory
 
 class DataFactory:
     def __init__(self):
@@ -30,7 +37,7 @@ class DataFactory:
         
         return user
 
-    def gen_users(self, num_users):
+    def gen_users(self, num_users=USER_NUMBER):
         users = []
         
         for _ in range(num_users):
@@ -71,7 +78,6 @@ class DataFactory:
             "discount_ratio": discount_ratio,
         }
 
-
     def gen_products(self, image_urls = PRODUCT_IMAGES):
         products = []
         for url in image_urls:
@@ -89,7 +95,104 @@ class DataFactory:
                 writer.writerow(data)
         
         return
+    
+    def load_from_csv(self, file_path):
+        data = []
 
+        with open(file_path, "r", encoding="utf-8-sig") as f:
+            reader  = csv.reader(f)
+            headers = next(reader)
+
+            for line in reader:
+                data.append({k: v for k, v in zip(headers, line)})
+
+        return data
+
+    def populate_users(self, records):
+        for record in records:
+            try:
+                user = User.objects.create(**record)
+                print(f'{user} CREATED')
+
+            except IntegrityError as e:
+                print(e.__cause__)
+        return
+        
+    def populate_categories(self, categories=CATEGORY):
+        for category in categories:
+            try:
+                category_name = category['name']
+                print(f'Creating Category {category_name}')
+                category_record = Category.objects.create(name=category_name)
+                print(f'{category_record} CREATED')
+
+            except IntegrityError as e:
+                if e.args[0]== 1062:
+                        print(f'{category_name} Already Exists.')
+                else:
+                    print(e.__cause__)
+
+            subcategories = category['subcategory']
+
+            for subcategory in subcategories:
+                try:
+                    subcategory_name = subcategory['name']
+                    print(f'Creating Category {subcategory_name}')
+                    subcategory_record = SubCategory.objects.create(name=subcategory_name, category=Category.objects.get(name=category['name']))
+                    print(f'{subcategory_record} CREATED')
+                except IntegrityError as e:
+                    if e.args[0] == 1062:
+                        print(f'{subcategory_name} Already Exists.')
+                    else:
+                        print(e.__cause__)
+        return
+    
+    def populate_characters(self, characters=CHARACTERS):
+        for charater in characters:
+            charater_name = charater['name']
+
+            try:
+                print(f'Creating Character {charater_name}')
+                charater_record = Character.objects.create(name=charater_name, image_url=charater['url'])
+                print(f'{charater_name} CREATED')
+
+            except IntegrityError as e:
+                if e.args[0] == 1062:
+                    print(f'{charater_name} Already Exists.')
+                else:
+                    print(e.__cause__)
+        return
+
+    def populate_products(self, records):
+        self.populate_categories()
+        self.populate_characters()
+        for record in records:
+            try:
+                product_name = record["name"]
+                print(f'Creating Product {product_name}')
+                product = Product.objects.create(
+                    name           = product_name,
+                    price          = float(record['price']),
+                    thumbnail_url  = record['thumbnail_url'],
+                    is_new         = record['is_new'],
+                    is_sale        = record['is_sale'],
+                    is_soldout     = record['is_soldout'],
+                    is_set         = record['is_set'],
+                    is_picked      = record['is_picked'],
+                    contents       = record['contents'],
+                    subcategory    = SubCategory.objects.get(name=record['subcategory']),
+                    character      = Character.objects.get(name=record['character']),
+                    discount_ratio = float(record['discount_ratio'])
+                )
+                print(f'{product_name} CREATED')
+
+            except IntegrityError as e:
+                if e.args[0] == 1062:
+                        print(f'{product_name} Already Exists.')
+                else:
+                    print(e.__cause__)
+        return
+        
     def get_random_true(self, probability):
         return random.random() < probability
     
