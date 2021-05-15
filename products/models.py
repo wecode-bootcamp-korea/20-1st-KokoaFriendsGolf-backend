@@ -1,13 +1,13 @@
 from django.db import models
 
 class Category(models.Model):
-    name = models.CharField('category name', max_length=30)
+    name = models.CharField('category name', max_length=30, unique=True)
 
     class Meta():
         db_table = 'categories'
 
 class SubCategory(models.Model):
-    name = models.CharField('subcategory name', max_length=30)
+    name = models.CharField('subcategory name', max_length=30, unique=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
     class Meta():
@@ -15,7 +15,7 @@ class SubCategory(models.Model):
 
 class Product(models.Model):
     name           = models.CharField('product name', max_length=30)
-    price          = models.DecimalField('product price', max_digits=8, decimal_places=2)
+    price          = models.DecimalField('product price', max_digits=10, decimal_places=2)
     thumbnail_url  = models.CharField('product thumbnail URL', max_length=2000)
     is_new         = models.BooleanField('new product', null=True)
     is_sale        = models.BooleanField('on sale product', null=True)
@@ -23,7 +23,7 @@ class Product(models.Model):
     is_set         = models.BooleanField('set product', null=True)
     is_picked      = models.BooleanField('MD picked product', null=True)
     contents       = models.TextField('product contents') 
-    sub_category   = models.ForeignKey('SubCategory', on_delete=models.CASCADE)
+    subcategory   = models.ForeignKey('SubCategory', on_delete=models.CASCADE)
     character      = models.ForeignKey('Character', on_delete=models.CASCADE)
     discount_ratio = models.DecimalField('discount ratio', max_digits=3, decimal_places=2) 
     created_at     = models.DateTimeField(auto_now_add=True)
@@ -40,7 +40,7 @@ class ProductRelation(models.Model):
         db_table = 'product_relations'
 
 class Character(models.Model):
-    name      = models.CharField('character name', max_length=30)
+    name      = models.CharField('character name', max_length=30, unique=True)
     image_url = models.URLField('character image URL', max_length=2000)
     
     class Meta():
