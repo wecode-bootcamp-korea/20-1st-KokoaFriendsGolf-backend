@@ -17,7 +17,9 @@ from data.mockup_data   import (CATEGORY,
                                 SOLDOUT_RATE,     
                                 SET_RATE,         
                                 PICKED_RATE,      
-                                PRICE_VOLATILITY)
+                                PRICE_VOLATILITY,
+                                LIKED_PRODUCT_RATIO,
+                                MAX_LIKE_COUNT)
 from users.models       import User
 from products.models    import Character, Product, Category, SubCategory
 
@@ -164,9 +166,27 @@ class DataFactory:
                     print(e.__cause__)
         return
 
+    def create_random_likes(self, liked_product_ratio=LIKED_PRODUCT_RATIO, max_like_count=MAX_LIKE_COUNT):
+        products             = Product.objects.all()
+        users                = User.objects.all()
+        num_liked_product    = int(len(products) * liked_product_ratio)
+        random_product_index = [random.randint(0, len(products)-1) for _ in range(num_liked_product)]
+        liked_products       = [products[idx] for idx in random_product_index]
+
+        for liked_product in liked_products:
+            num_user_liked    = random.randint(1, max_like_count)
+            random_user_index = [ random.randint(0, len(users)-1) for _ in range(num_user_liked)]
+            like_users        = [users[idx] for idx in random_user_index]
+            list_like_user_id = list(map(lambda x: x.id, like_users))
+            print(f'Link {len(list_like_user_id)} users to {liked_product}')
+            liked_product.like_users.set(list_like_user_id)
+
+        return
+
     def populate_products(self, records):
         self.populate_categories()
         self.populate_characters()
+
         for record in records:
             try:
                 product_name = record["name"]
@@ -194,9 +214,12 @@ class DataFactory:
                     print(e.__cause__)
             
             except MultipleObjectsReturned as e:
+                print("Duplicated Entry Found, Remove Duplicated Entry")
                 print(e.__cause__)
                 return
-                
+        
+        self.create_random_likes()
+
         return
         
     def get_random_true(self, probability):
