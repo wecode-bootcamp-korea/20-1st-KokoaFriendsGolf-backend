@@ -55,7 +55,7 @@ class DataFactory:
         character_ko                                        = ENG_KO[character_eng]
         name                                                = self.get_random_element(PRODUCT_NAME_PREFIX) + " " + subcategory_ko + "-" + character_ko
         avg_price                                           = self.search_data('name', subcategory_ko, self.search_data('name', category_ko, CATEGORY)['subcategory'])['avg_price']
-        price                                               = 1000 * round(random.randint(avg_price*(1-PRICE_VOLATILITY), avg_price*(1+PRICE_VOLATILITY))/1000)
+        price                                               = 100 * round(random.randint(avg_price*(1-PRICE_VOLATILITY), avg_price*(1+PRICE_VOLATILITY))/100)
         thumbnail_url                                       = product_image_url
         is_new                                              = self.get_random_true(NEW_RATE)
         is_sale                                             = self.get_random_true(SALE_RATE)
