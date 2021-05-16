@@ -14,7 +14,7 @@ class SubCategory(models.Model):
         db_table = 'subcategories'
 
 class Product(models.Model):
-    name           = models.CharField('product name', max_length=30)
+    name           = models.CharField('product name', max_length=30, unique=True)
     price          = models.DecimalField('product price', max_digits=10, decimal_places=2)
     thumbnail_url  = models.CharField('product thumbnail URL', max_length=2000)
     is_new         = models.BooleanField('new product', null=True)
