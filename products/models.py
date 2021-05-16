@@ -111,3 +111,13 @@ class Answer(models.Model):
     updated_at  = models.DateTimeField(auto_now=True)
     class Meta():
         db_table = 'answers'
+    
+class Like(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+
+    class Meta():
+        db_table = 'likes'
+    
+    def __str__(self):
+        return f'{self.user.email} : {self.product.name}'
