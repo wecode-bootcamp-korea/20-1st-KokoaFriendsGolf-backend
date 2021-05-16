@@ -1,10 +1,12 @@
-USER_NUMBER      = 100
-NEW_RATE         = 0.05
-SALE_RATE        = 0.1
-SOLDOUT_RATE     = 0.03
-SET_RATE         = 0.01
-PICKED_RATE      = 0.05
-PRICE_VOLATILITY = 0.03
+USER_NUMBER         = 100
+NEW_RATE            = 0.05
+SALE_RATE           = 0.1
+SOLDOUT_RATE        = 0.03
+SET_RATE            = 0.01
+PICKED_RATE         = 0.05
+PRICE_VOLATILITY    = 0.03
+LIKED_PRODUCT_RATIO = 0.15
+MAX_LIKE_COUNT      = 125
 
 CHARACTERS = [
     {"id": 1, "name": "콘콘", "url": "https://i.ibb.co/Y26pvpF/dinosaur.png"},
