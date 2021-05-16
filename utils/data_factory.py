@@ -3,6 +3,7 @@ import random
 from faker              import Faker
 
 from django.db          import IntegrityError
+from django.core.exceptions import MultipleObjectsReturned
 
 from data.mockup_data   import (CATEGORY, 
                                 CHARACTERS, 
@@ -191,6 +192,11 @@ class DataFactory:
                         print(f'{product_name} Already Exists.')
                 else:
                     print(e.__cause__)
+            
+            except MultipleObjectsReturned as e:
+                print(e.__cause__)
+                return
+                
         return
         
     def get_random_true(self, probability):
