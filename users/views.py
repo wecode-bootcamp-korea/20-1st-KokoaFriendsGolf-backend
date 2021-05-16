@@ -1,6 +1,5 @@
 import time
 import bcrypt
-import jwt
 import json
 from json                   import JSONDecodeError
 
@@ -9,8 +8,10 @@ from django.http            import JsonResponse
 from django.core.exceptions import ValidationError
 
 from users.models           import User
-from utils.validators       import validate_email, validate_password, validate_gender, validate_duplicate, DuplicatedEntryError
+
 from my_settings            import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_DURATION_SEC
+from users.utils            import validate_email, validate_password, validate_gender
+from utils.validators       import validate_duplicate, DuplicatedEntryError
 
 class SignInView(View):
 
@@ -39,29 +40,28 @@ class SignInView(View):
         except User.DoesNotExist:
             return JsonResponse({"status": "INVALID_USER"}, status=401)
 class SignUpView(View):
-
     def post(self, request):
 
         try:
             data = json.loads(request.body)
 
-            validate_email(data["email"])
-            validate_password(data["password"])
-            data['gender'] = validate_gender(data.get('gender'))
+            email = validate_email(data["email"])
+            password = validate_password(data["password"])
+            gender = validate_gender(data.get('gender'))
             validate_duplicate(User, data)
-
-            hashed_password = bcrypt.hashpw(str(data.get('password')).encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-
+            
+            hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+            
             user = User.objects.create(
-                email           = data.get('email'),
+                email           = email,
                 password        = hashed_password,
                 phone_number    = data['phone_number'],
                 name            = data['name'],
                 birthday        = data.get('birthday'),
-                gender          = data.get('gender'),
+                gender          = gender,
             )
 
-            return JsonResponse({"status": "SUCCESS", "user": user.to_dict()}, status=200)
+            return JsonResponse({"status": "SUCCESS", "data": {"user": user.to_dict()}}, status=200)
 
         except JSONDecodeError as e:
             return JsonResponse({"status": "JSON_DECODE_ERROR", "message": e.msg}, status=400)
