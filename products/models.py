@@ -46,6 +46,7 @@ class Product(models.Model):
             "is_soldout"    : False if not self.is_soldout else True,
             "is_set"        : False if not self.is_set else True,
             "is_picked"     : False if not self.is_picked else True,
+            "counts_liked"  : self.like_users.count(),
             "contents"      : self.contents,
             "subcategory"   : subcategory.name,
             "category"      : category.name,
