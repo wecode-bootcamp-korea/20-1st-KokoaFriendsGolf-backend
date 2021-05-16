@@ -7,7 +7,7 @@ def validate_duplicate(model, data):
     non_duplicatable_fields = [
         field.attname
         for field in model._meta.get_fields()
-        if field.unique
+        if not field.is_relation and field.unique
     ]
 
     for field in non_duplicatable_fields:
