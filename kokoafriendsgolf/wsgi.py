@@ -7,10 +7,17 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 """
 
+#import os
+
+#from django.core.wsgi import get_wsgi_application
+
+#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'kokoafriendsgolf.settings')
+
+#application = get_wsgi_application()
 import os
-
+import sys
+sys.path.append('/opt/bitnami/projects/KokoaFriendsMart-backend')
+os.environ.setdefault("PYTHON_EGG_CACHE", "/opt/bitnami/projects/KokoaFriendsMart-backend/egg_cache")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "kokoafriendsgolf.settings")
 from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'kokoafriendsgolf.settings')
-
 application = get_wsgi_application()
