@@ -10,6 +10,7 @@ class User(models.Model):
     name         = models.CharField("user's name", max_length=20, blank=False)
     birthday     = models.DateField("user's birthday", blank=True, null=True)
     gender       = models.CharField("user's gender", max_length=1)
+    like_products = models.ManyToManyField("products.Product", through="products.Like", related_name="like_users")
 
     class Meta:
         db_table = "users"
