@@ -16,9 +16,9 @@ class SignUpView(View):
         try:
             data = json.loads(request.body)
 
-            email = validate_email(data["email"])
+            email    = validate_email(data["email"])
             password = validate_password(data["password"])
-            gender = validate_gender(data.get('gender'))
+            gender   = validate_gender(data.get('gender'))
             validate_duplicate(User, data)
             
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
