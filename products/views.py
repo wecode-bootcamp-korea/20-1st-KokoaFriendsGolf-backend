@@ -16,13 +16,7 @@ class ProductListView(View):
         all_product_name = get_name_list(Product)
         product_list     = []
 
-        if search is not None:
-            for word in all_product_name:
-                if search in word:
-                    product_list.append(word)
-            products = Product.objects.filter(name__in = product_list)
-        
-        if cname is None:
+        if cname in [None, '']:
             products = Product.objects.all()
         
         if cname in get_name_list(Category):
@@ -35,6 +29,12 @@ class ProductListView(View):
             
         if cname in get_name_list(Character):
             products = Product.objects.filter(character__name = cname)
+        
+        if search is not None:
+            for word in all_product_name:
+                if search in word:
+                    product_list.append(word)
+            products = Product.objects.filter(name__in = product_list)
         
         if order_by == 'RECENT':
             products = products.order_by('-created_at')
