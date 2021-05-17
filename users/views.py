@@ -6,6 +6,7 @@ from django.views           import View
 from django.http            import JsonResponse
 from django.core.exceptions import ValidationError
 from django.db.utils        import DataError
+
 from users.models           import User
 from users.utils            import validate_email, validate_password, validate_gender
 from utils.validators       import validate_duplicate, DuplicatedEntryError
