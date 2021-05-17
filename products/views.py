@@ -9,10 +9,20 @@ from utils.utils            import get_name_list
 
 class ProductListView(View):
     def get(self, request):
-        order_by        = request.GET.get('orderBy', '-RECENT')
-        cname           = request.GET.get('cname')
-        products        = Product.objects.none()
+        order_by         = request.GET.get('orderBy', '-RECENT')
+        cname            = request.GET.get('cname')
+        search           = request.GET.get('search')
+        products         = Product.objects.none()
+        all_product_name = get_name_list(Product)
+        product_list     = []
 
+        if search is not None:
+            for word in all_product_name:
+                if search in word:
+                    product_list.append(word)
+            for search_name in product_list:
+                products = Product.objects.filter(name = search_name)
+        
         if cname is None:
             products = Product.objects.all()
         
@@ -25,7 +35,7 @@ class ProductListView(View):
             products = Product.objects.filter(subcategory__name = cname)
             
         if cname in get_name_list(Character):
-            products = Product.objects.filter(charater__name = cname)
+            products = Product.objects.filter(character__name = cname)
         
         if order_by == 'RECENT':
             products = products.order_by('-created_at')
