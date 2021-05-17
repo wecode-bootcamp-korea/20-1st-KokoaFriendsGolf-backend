@@ -1,27 +1,27 @@
 import csv
 import random
-from faker              import Faker
+from faker                  import Faker
 
-from django.db          import IntegrityError
+from django.db              import IntegrityError
 from django.core.exceptions import MultipleObjectsReturned
 
-from data.mockup_data   import (CATEGORY, 
-                                CHARACTERS, 
-                                PRODUCT_IMAGES, 
-                                PRODUCT_NAME_PREFIX, 
-                                ENG_KO, 
-                                DETAIL_CONTENTS,
-                                USER_NUMBER,      
-                                NEW_RATE,         
-                                SALE_RATE,        
-                                SOLDOUT_RATE,     
-                                SET_RATE,         
-                                PICKED_RATE,      
-                                PRICE_VOLATILITY,
-                                LIKED_PRODUCT_RATIO,
-                                MAX_LIKE_COUNT)
-from users.models       import User
-from products.models    import Character, Product, Category, SubCategory
+from data.mockup_data       import (CATEGORY, 
+                                    CHARACTERS, 
+                                    PRODUCT_IMAGES, 
+                                    PRODUCT_NAME_PREFIX, 
+                                    ENG_KO, 
+                                    DETAIL_CONTENTS,
+                                    USER_NUMBER,      
+                                    NEW_RATE,         
+                                    SALE_RATE,        
+                                    SOLDOUT_RATE,     
+                                    SET_RATE,         
+                                    PICKED_RATE,      
+                                    PRICE_VOLATILITY,
+                                    LIKED_PRODUCT_RATIO,
+                                    MAX_LIKE_COUNT)
+from users.models           import User
+from products.models        import Character, Product, Category, SubCategory
 
 class DataFactory:
     def __init__(self):
@@ -88,7 +88,6 @@ class DataFactory:
         return products
     
     def save_to_csv(self, db, file_path):
-        
         with open(file_path, 'w', encoding="utf-8-sig", newline="") as f:
             column_names = list(db[0].keys())
             writer       = csv.DictWriter(f, fieldnames= column_names)
