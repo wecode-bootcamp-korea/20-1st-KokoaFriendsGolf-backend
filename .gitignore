@@ -1,6 +1,7 @@
 my_settings.py
 .vscode
 .env
+mockup_data.py
 
 # Created by https://www.toptal.com/developers/gitignore/api/django,vscode,macos,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,vscode,macos,python

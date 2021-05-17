@@ -1,21 +1,21 @@
 from django.db import models
 
 class Category(models.Model):
-    name = models.CharField('category name', max_length=30)
+    name = models.CharField('category name', max_length=30, unique=True)
 
     class Meta():
         db_table = 'categories'
 
 class SubCategory(models.Model):
-    name = models.CharField('subcategory name', max_length=30)
+    name = models.CharField('subcategory name', max_length=30, unique=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
     class Meta():
         db_table = 'subcategories'
 
 class Product(models.Model):
-    name           = models.CharField('product name', max_length=30)
-    price          = models.DecimalField('product price', max_digits=8, decimal_places=2)
+    name           = models.CharField('product name', max_length=30, unique=True)
+    price          = models.DecimalField('product price', max_digits=10, decimal_places=2)
     thumbnail_url  = models.CharField('product thumbnail URL', max_length=2000)
     is_new         = models.BooleanField('new product', null=True)
     is_sale        = models.BooleanField('on sale product', null=True)
@@ -32,7 +32,7 @@ class Product(models.Model):
     class Meta():
         db_table = 'products'
     
-    def get_info(self):
+    def get_info(self, exclude=[]):
         subcategory = SubCategory.objects.get(id=self.subcategory.id)
         category = subcategory.category
 
@@ -46,6 +46,7 @@ class Product(models.Model):
             "is_soldout"    : False if not self.is_soldout else True,
             "is_set"        : False if not self.is_set else True,
             "is_picked"     : False if not self.is_picked else True,
+            "counts_liked"  : self.like_users.count(),
             "contents"      : self.contents,
             "subcategory"   : subcategory.name,
             "category"      : category.name,
@@ -54,6 +55,9 @@ class Product(models.Model):
             "created_at"    : self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
             "updated_at"    : self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
         }
+
+        for excluded_keys in exclude:
+            product_info.pop(excluded_keys)
         
         return product_info
 
@@ -65,7 +69,7 @@ class ProductRelation(models.Model):
         db_table = 'product_relations'
 
 class Character(models.Model):
-    name      = models.CharField('character name', max_length=30)
+    name      = models.CharField('character name', max_length=30, unique=True)
     image_url = models.URLField('character image URL', max_length=2000)
     
     class Meta():
@@ -111,3 +115,13 @@ class Answer(models.Model):
     updated_at  = models.DateTimeField(auto_now=True)
     class Meta():
         db_table = 'answers'
+    
+class Like(models.Model):
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE)
+
+    class Meta():
+        db_table = 'likes'
+    
+    def __str__(self):
+        return f'{self.user.email} : {self.product.name}'
