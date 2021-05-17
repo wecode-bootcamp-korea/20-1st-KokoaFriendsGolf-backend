@@ -1,11 +1,12 @@
 from django.views           import View
 from django.http.response   import JsonResponse
+from django.utils.decorators import method_decorator
 
 from products.models        import (Category, 
                                     SubCategory, 
                                     Product, 
                                     Character)
-from utils.utils            import get_name_list
+from utils.utils            import get_name_list, login_required
 
 class ProductDetailView(View):
     def get(self, request, id):
@@ -22,6 +23,7 @@ class CategoryView(View):
         pass
 
 class ProductListView(View):
+    @method_decorator(login_required())
     def get(self, request):
         order_by         = request.GET.get('orderBy', '-RECENT')
         cname            = request.GET.get('cname')
