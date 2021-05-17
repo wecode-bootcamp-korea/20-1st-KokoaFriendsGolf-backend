@@ -25,7 +25,7 @@ class ProductListView(View):
             products = Product.objects.filter(subcategory__name = cname)
             
         if cname in get_name_list(Character):
-            products = Product.objects.filter(charater__name = cname)
+            products = Product.objects.filter(character__name = cname)
         
         if order_by == 'RECENT':
             products = products.order_by('-created_at')
