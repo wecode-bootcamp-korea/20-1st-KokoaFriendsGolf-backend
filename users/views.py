@@ -12,7 +12,6 @@ from utils.validators       import validate_duplicate, DuplicatedEntryError
 
 class SignUpView(View):
     def post(self, request):
-
         try:
             data     = json.loads(request.body)
             email    = validate_email(data["email"])
