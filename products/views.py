@@ -20,8 +20,7 @@ class ProductListView(View):
             for word in all_product_name:
                 if search in word:
                     product_list.append(word)
-            for search_name in product_list:
-                products = Product.objects.filter(name = search_name)
+            products = Product.objects.filter(name__in = product_list)
         
         if cname is None:
             products = Product.objects.all()
