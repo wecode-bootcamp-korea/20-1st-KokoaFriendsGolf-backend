@@ -151,17 +151,17 @@ class DataFactory:
         return
     
     def populate_characters(self, characters=CHARACTERS):
-        for charater in characters:
-            charater_name = charater['name']
+        for character in characters:
+            character_name = character['name']
 
             try:
-                print(f'Creating Character {charater_name}')
-                charater_record = Character.objects.create(name=charater_name, image_url=charater['url'])
-                print(f'{charater_name} CREATED')
+                print(f'Creating Character {character_name}')
+                character_record = Character.objects.create(name=character_name, image_url=character['url'])
+                print(f'{character_name} CREATED')
 
             except IntegrityError as e:
                 if e.args[0] == 1062:
-                    print(f'{charater_name} Already Exists.')
+                    print(f'{character_name} Already Exists.')
                 else:
                     print(e.__cause__)
         return
