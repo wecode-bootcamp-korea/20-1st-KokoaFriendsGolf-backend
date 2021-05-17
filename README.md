@@ -24,7 +24,7 @@ mkdir -p ./data && cd ./data && curl -LJO --url https://gist.githubusercontent.c
 pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
-python manage.**py** generate_user_data
+python manage.py generate_user_data
 python manage.py generate_product_data
 python manage.py populate_user_db
 python manage.py populate_product_db
