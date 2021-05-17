@@ -32,7 +32,7 @@ class Product(models.Model):
     class Meta():
         db_table = 'products'
     
-    def get_info(self):
+    def get_info(self, exclude=[]):
         subcategory = SubCategory.objects.get(id=self.subcategory.id)
         category = subcategory.category
 
@@ -55,6 +55,9 @@ class Product(models.Model):
             "created_at"    : self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
             "updated_at"    : self.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
         }
+
+        for excluded_keys in exclude:
+            product_info.pop(excluded_keys)
         
         return product_info
 
