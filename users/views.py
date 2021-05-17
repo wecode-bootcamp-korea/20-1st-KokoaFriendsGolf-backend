@@ -5,7 +5,7 @@ from json                   import JSONDecodeError
 from django.views           import View
 from django.http            import JsonResponse
 from django.core.exceptions import ValidationError
-
+from django.db.utils        import DataError
 from users.models           import User
 from users.utils            import validate_email, validate_password, validate_gender
 from utils.validators       import validate_duplicate, DuplicatedEntryError
@@ -14,8 +14,7 @@ class SignUpView(View):
     def post(self, request):
 
         try:
-            data = json.loads(request.body)
-
+            data     = json.loads(request.body)
             email    = validate_email(data["email"])
             password = validate_password(data["password"])
             gender   = validate_gender(data.get('gender'))
@@ -45,3 +44,6 @@ class SignUpView(View):
 
         except DuplicatedEntryError as e:
             return JsonResponse({"status": "DUPLICATED_ENTRY_ERROR", "message": e.err_message}, status=409)
+
+        except DataError as e:
+            return JsonResponse({"status": "INVALID_DATA_ERROR", "message": e.args[1]}, status=400)
