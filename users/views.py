@@ -6,6 +6,7 @@ from json                       import JSONDecodeError
 
 from django.views               import View
 from django.http                import JsonResponse
+from django.db.utils            import DataError
 
 from users.models               import User
 from kokoafriendsgolf.settings  import JWT_SECRET_KEY, JWT_ALGORITHM, JWT_DURATION_SEC
@@ -41,3 +42,6 @@ class SignInView(View):
         
         except User.DoesNotExist: 
             return JsonResponse({"status": "INVALID_USER"}, status=401)
+        
+        except DataError as e:
+            return JsonResponse({"status": "INVALID_DATA_ERROR", "message": e.args[1]}, status=400)
