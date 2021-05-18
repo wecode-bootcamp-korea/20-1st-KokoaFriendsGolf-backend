@@ -68,3 +68,17 @@ class ProductListView(View):
         data = [product.get_info(exclude=["contents"]) for product in products]
 
         return JsonResponse({"status": "SUCCESS", "data": {"product_list" : data, "is_last_page": is_last_page}}, status=200)
+
+class ProductDetailView(View):
+    def get(self, request, id):
+        try:
+            product      = Product.objects.get(id=id)
+            product_info = product.get_info()
+            return JsonResponse({'status': "SUCCESS", 'data':{'product': product_info}}, status=200)
+
+        except Product.DoesNotExist:
+            return JsonResponse({"status": "PRODUCT_NOT_FOUND", "message": "존재하지 않는 상품입니다."}, status=404)
+            
+class CategoryView(View):
+    def get(self, request):
+        pass
