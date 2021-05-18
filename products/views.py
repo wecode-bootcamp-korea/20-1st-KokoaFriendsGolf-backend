@@ -1,13 +1,16 @@
-from django.views           import View
-from django.http.response   import JsonResponse
+from django.views               import View
+from django.http.response       import JsonResponse
+from django.utils.decorators    import method_decorator
 
-from products.models        import (Category, 
-                                    SubCategory, 
-                                    Product, 
-                                    Character)
+from products.models            import (Category, 
+                                        SubCategory, 
+                                        Product, 
+                                        Character)
 from utils.utils            import get_name_list
+from utils.decorators       import check_user
 
 class ProductListView(View):
+    @method_decorator(check_user())
     def get(self, request):
         order_by         = request.GET.get('orderBy', '-RECENT')
         cname            = request.GET.get('cname')
@@ -18,6 +21,7 @@ class ProductListView(View):
         all_product_name = get_name_list(Product)
         product_list     = []
         is_last_page     = True
+        user             = request.user
 
         if cname in [None, '']:
             products = Product.objects.all()
@@ -64,7 +68,7 @@ class ProductListView(View):
             else:
                 products = products[offset:]
                         
-        data = [product.get_info(exclude=["contents"]) for product in products]
+        data = [product.get_info(exclude=["contents"], user=user) for product in products]
 
         return JsonResponse({"status": "SUCCESS", "data": {"product_list" : data, "is_last_page": is_last_page}}, status=200)
 
