@@ -10,7 +10,7 @@ class ProductListView(View):
 class ProductDetailView(View):
     def get(self, request, id):
         try:
-            product = Product.objects.get(id=id)
+            product      = Product.objects.get(id=id)
             product_info = product.get_info()
             return JsonResponse({'status': "SUCCESS", 'data':{'product': product_info}}, status=200)
 
