@@ -14,7 +14,7 @@ def login_required():
             if token:
                 user         = get_user_from_jwt(token)
                 request.user = user
-                return function(request, *args, *kwargs)
+                return function(request, *args, **kwargs)
             else:
                 return JsonResponse({"status": "UNAUTHORIZED_ERROR", "message": "Login Required."}, status=401)
 
@@ -31,13 +31,13 @@ def check_user():
                 if token:
                     user         = User.objects.get(pk=decode_jwt(token).get('user_id'))
                     request.user = user
-                    return function(request, *args, *kwargs)
+                    return function(request, *args, **kwargs)
                 else:
                     request.user = None
-                    return function(request, *args, *kwargs)
+                    return function(request, *args, **kwargs)
             except:
                 request.user = None
-                return function(request, *args, *kwargs)
+                return function(request, *args, **kwargs)
 
         return wrapper_check_user
     return decorator
