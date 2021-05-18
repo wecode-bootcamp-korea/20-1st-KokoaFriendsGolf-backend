@@ -1,7 +1,7 @@
 import time
 import bcrypt
-import jwt
 import json
+import jwt
 from json                       import JSONDecodeError
 
 from django.views               import View
@@ -36,13 +36,10 @@ class SignInView(View):
 
             return JsonResponse({"status": "SUCCESS", "data": {"token": new_token}}, status=200)
 
-        except JSONDecodeError as e: 
-            return JsonResponse({"status": "JSON_DECODE_ERROR", "message": e.msg}, status=400)
-
-        except KeyError as e: 
+        except KeyError as e:
             return JsonResponse({"status": "KEY_ERROR", "message": f'Key Error in Field "{e.args[0]}"'}, status=400)
         
-        except User.DoesNotExist: 
+        except User.DoesNotExist:
             return JsonResponse({"status": "INVALID_USER"}, status=401)
         
         except DataError as e:
@@ -70,13 +67,13 @@ class SignUpView(View):
 
             return JsonResponse({"status": "SUCCESS", "data": {"user": user.to_dict()}}, status=200)
 
-        except JSONDecodeError as e:
+        except JSONDecodeError as e: 
             return JsonResponse({"status": "JSON_DECODE_ERROR", "message": e.msg}, status=400)
-
+            
         except ValidationError as e:
             return JsonResponse({"status": "INVALID_DATA_ERROR", "message": e.message}, status=400)
 
-        except KeyError as e:
+        except KeyError as e: 
             return JsonResponse({"status": "KEY_ERROR", "message": f'Key Error in Field "{e.args[0]}"'}, status=400)
 
         except DuplicatedEntryError as e:
