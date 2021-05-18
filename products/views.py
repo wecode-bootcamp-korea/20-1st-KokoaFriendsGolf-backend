@@ -12,8 +12,8 @@ class ProductListView(View):
         order_by         = request.GET.get('orderBy', '-RECENT')
         cname            = request.GET.get('cname')
         search           = request.GET.get('search')
-        limit            = request.GET.get('limit')
-        offset           = request.GET.get('offset')
+        limit            = int(request.GET.get('limit'))
+        offset           = int(request.GET.get('offset'))
         products         = Product.objects.none()
         all_product_name = get_name_list(Product)
         product_list     = []
@@ -57,12 +57,11 @@ class ProductListView(View):
         if order_by == '-LIKE':
             products = sorted(products, key = lambda product: product.like_users.count())
 
-        if limit and offset is not None:
+        if limit and offset:
             if len(products) > (offset+limit):
                 products = products[offset:offset+limit]
                 is_last_page = False
-
-            if len(products) <= (offset+limit):
+            else:
                 products = products[offset:]
                         
         data = [product.get_info(exclude=["contents"]) for product in products]
