@@ -12,8 +12,8 @@ class ProductListView(View):
         order_by         = request.GET.get('orderBy', '-RECENT')
         cname            = request.GET.get('cname')
         search           = request.GET.get('search')
-        limit            = int(request.GET.get('limit'))
-        offset           = int(request.GET.get('offset'))
+        limit            = int(request.GET.get('limit')) if request.GET.get('limit') else None
+        offset           = int(request.GET.get('offset')) if request.GET.get('limit') else None
         products         = Product.objects.none()
         all_product_name = get_name_list(Product)
         product_list     = []
