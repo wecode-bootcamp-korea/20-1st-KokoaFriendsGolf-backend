@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
             self.stdout.write(self.style.NOTICE("Start Populating Product DB"))
 
-            factory  = DataFactory()
+            factory      = DataFactory()
             product_data = factory.load_from_csv(file_path)
             print(product_data[0])
             factory.populate_products(product_data)
