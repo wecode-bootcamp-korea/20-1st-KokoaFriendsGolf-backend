@@ -10,18 +10,10 @@ def get_name_list(model):
 
 def decode_jwt(token):
     return jwt.decode(token, JWT_SECRET_KEY, JWT_ALGORITHM)
+
     
 def get_user_from_jwt(token):
-    try:
-        payload = decode_jwt(token)
-        user    = User.objects.get(pk=payload.get('user_id'))
-        return user
-
-    except jwt.exceptions.ExpiredSignatureError as e:
-        return JsonResponse({"status": "TOKEN_ERROR", "message": e.args[0]}, status=401)
-
-    except jwt.exceptions.InvalidSignatureError as e:
-        return JsonResponse({"status": "TOKEN_ERROR", "message": e.args[0]}, status=401)
-
-    except jwt.exceptions.DecodeError as e:
-        return JsonResponse({"status": "TOKEN_ERROR", "message": e.args[0]}, status=401)
+    payload = decode_jwt(token)
+    user    = User.objects.get(pk=payload.get('user_id'))
+    return user
+    
