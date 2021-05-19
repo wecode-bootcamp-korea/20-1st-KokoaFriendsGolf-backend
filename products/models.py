@@ -32,7 +32,7 @@ class Product(models.Model):
     class Meta():
         db_table = 'products'
     
-    def get_info(self, exclude=[]):
+    def get_info(self, exclude=[], user=None):
         subcategory = SubCategory.objects.get(id=self.subcategory.id)
         category = subcategory.category
 
@@ -46,6 +46,7 @@ class Product(models.Model):
             "is_soldout"    : False if not self.is_soldout else True,
             "is_set"        : False if not self.is_set else True,
             "is_picked"     : False if not self.is_picked else True,
+            "is_liked"      : False if not user else self.like_users.filter(id=user.id).exists(),
             "counts_liked"  : self.like_users.count(),
             "contents"      : self.contents,
             "subcategory"   : subcategory.name,
@@ -59,8 +60,8 @@ class Product(models.Model):
         for excluded_keys in exclude:
             product_info.pop(excluded_keys)
         
-        return product_info
-
+        return product_info    
+    
 class ProductRelation(models.Model):
     reference       = models.ForeignKey('Product', related_name='reference', on_delete=models.CASCADE)
     related_product = models.ForeignKey('Product', related_name='related_products', on_delete=models.CASCADE)
