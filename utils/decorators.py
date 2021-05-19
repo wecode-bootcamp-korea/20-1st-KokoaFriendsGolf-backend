@@ -13,7 +13,6 @@ def login_required():
             token = request.headers.get('Authorization')
             
             try:
-
                 if token:
                     user         = get_user_from_jwt(token)
                     request.user = user
