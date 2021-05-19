@@ -9,13 +9,14 @@ from products.models            import (Category,
                                         Character)
 from utils.utils                import get_name_list
 from utils.decorators           import check_user
+
 class ProductListView(View):
     def get(self, request):
         order_by         = request.GET.get('orderBy', '-RECENT')
         cname            = request.GET.get('cname')
         search           = request.GET.get('search')
         limit            = int(request.GET.get('limit')) if request.GET.get('limit') else None
-        offset           = int(request.GET.get('offset')) if request.GET.get('limit') else None
+        offset           = int(request.GET.get('offset')) if request.GET.get('offset') else None
         products         = Product.objects.none()
         all_product_name = get_name_list(Product)
         product_list     = []
@@ -59,7 +60,7 @@ class ProductListView(View):
         if order_by == '-LIKE':
             products = sorted(products, key = lambda product: product.like_users.count())
 
-        if limit and offset:
+        if (limit is not None) and (offset is not None):
             if len(products) > (offset+limit):
                 products = products[offset:offset+limit]
                 is_last_page = False
