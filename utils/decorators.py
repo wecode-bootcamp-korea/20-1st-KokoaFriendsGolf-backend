@@ -1,3 +1,4 @@
+import jwt
 import functools
 
 from django.http import JsonResponse
@@ -11,13 +12,27 @@ def login_required():
         def wrapper_login_required(request, *args, **kwargs):
             token = request.headers.get('Authorization')
             
-            if token:
-                user         = get_user_from_jwt(token)
-                request.user = user
-                return function(request, *args, **kwargs)
-            else:
-                return JsonResponse({"status": "UNAUTHORIZED_ERROR", "message": "Login Required."}, status=401)
+            try:
 
+                if token:
+                    user         = get_user_from_jwt(token)
+                    request.user = user
+                    return function(request, *args, **kwargs)
+                else:
+                    return JsonResponse({"status": "UNAUTHORIZED_ERROR", "message": "Login Required."}, status=401)
+                
+            except jwt.exceptions.ExpiredSignatureError as e:
+                return JsonResponse({"status": "TOKEN_ERROR", "message": e.args[0]}, status=401)
+
+            except jwt.exceptions.InvalidSignatureError as e:
+                return JsonResponse({"status": "TOKEN_ERROR", "message": e.args[0]}, status=401)
+
+            except jwt.exceptions.DecodeError as e:
+                return JsonResponse({"status": "TOKEN_ERROR", "message": e.args[0]}, status=401)
+
+            except User.DoesNotExist:
+                return JsonResponse({"status": "INVALID_USER"}, status=401)
+                
         return wrapper_login_required
     return decorator
 
