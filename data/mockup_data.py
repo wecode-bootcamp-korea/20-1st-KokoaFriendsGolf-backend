@@ -353,252 +353,246 @@ PRODUCT_IMAGES = [
 DETAIL_CONTENTS = {
     'Electronics': 
 '''
-<ul class="descriptionList">
-  <li>
-    <h2>콘콘 스마트폰</h2>
-    <p class="productDescription">
-      5G 스피드. 스마트폰 사상 가장 빠른 A14 Bionic 칩. 전면 화면 OLED 디스플레이.<br /> 
-      4배 나은 낙하 성능을 선사하는 Ceramic Shield.<br /> 
-      그리고 모든 카메라에서 지원되는 ‘야간 모드’까지.<br /> 
-      이 모든 것을 담은 콘콘 스마트폰, 두 가지 완벽한 사이즈로 만날 수 있습니다.<br />
-    </p>
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 1"
-      src="https://i.ibb.co/n7cYbbC/Electronics-Phone-Peepee-4.png"
-      id="1"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 2"
-      src="https://i.ibb.co/pbPjH20/Electronics-Phone-Chunsam-0.png"
-      id="2"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 3"
-      src="https://i.ibb.co/HDm5Wd7/Electronics-Watch-Duckee-2.png"
-      id="3"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 4"
-      src="https://i.ibb.co/p2D4zdc/Electronics-Watch-Concon-2.png"
-      id="4"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 5"
-      src="https://i.ibb.co/PDfLdWt/Electronics-Imac-Peepee-8.png"
-      id="5"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 6"
-      src="https://i.ibb.co/fnhppMJ/Electronics-Imac-Concon-0.png"
-      id="6"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 7"
-      src="https://i.ibb.co/86S6tZv/group-Image.jpg"
-      id="7"
-    />
-  </li>
-  <li>
-    <h2>콘콘 스마트폰</h2>
-    <p class="productDescription">
-      초고속 스피드를 자랑하는 iPhone의 5G.<br /> 
-      영화 몇 편을 순식간에 다운로드하고, 고화질 동영상을 가뿐하게 스트리밍하고, 훨씬 적은 지연 시간으로 멀티플레이어 게임을 즐길 수 있게 해줍니다.<br /> 
-      통신 환경이나 상황에 따라 5G와 LTE를 자동으로 오가는 스마트 데이터 모드 덕분에 배터리를 절약할 수 있는 것은 물론, 기기 자체에서 5G와 LTE 대역도 그 어느 때보다 다양하게 지원하기 때문에 그 모든 것을 세계 더 많은 곳에서 누릴 수 있죠.
-    </p>
-  </li>
-</ul>
+<li class="detailContentsList">
+  <h2>콘콘 스마트폰</h2>
+  <p class="productDescription">
+    5G 스피드. 스마트폰 사상 가장 빠른 A14 Bionic 칩. 전면 화면 OLED 디스플레이.<br /> 
+    4배 나은 낙하 성능을 선사하는 Ceramic Shield.<br /> 
+    그리고 모든 카메라에서 지원되는 ‘야간 모드’까지.<br /> 
+    이 모든 것을 담은 콘콘 스마트폰, 두 가지 완벽한 사이즈로 만날 수 있습니다.<br />
+  </p>
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 1"
+    src="https://i.ibb.co/n7cYbbC/Electronics-Phone-Peepee-4.png"
+    id="1"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 2"
+    src="https://i.ibb.co/pbPjH20/Electronics-Phone-Chunsam-0.png"
+    id="2"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 3"
+    src="https://i.ibb.co/HDm5Wd7/Electronics-Watch-Duckee-2.png"
+    id="3"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 4"
+    src="https://i.ibb.co/p2D4zdc/Electronics-Watch-Concon-2.png"
+    id="4"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 5"
+    src="https://i.ibb.co/PDfLdWt/Electronics-Imac-Peepee-8.png"
+    id="5"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 6"
+    src="https://i.ibb.co/fnhppMJ/Electronics-Imac-Concon-0.png"
+    id="6"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 7"
+    src="https://i.ibb.co/86S6tZv/group-Image.jpg"
+    id="7"
+  />
+</li>
+<li>
+  <h2>콘콘 스마트폰</h2>
+  <p class="productDescription">
+    초고속 스피드를 자랑하는 iPhone의 5G.<br /> 
+  영화 몇 편을 순식간에 다운로드하고, 고화질 동영상을 가뿐하게 스트리밍하고, 훨씬 적은 지연 시간으로 멀티플레이어 게임을 즐길 수 있게 해줍니다.<br /> 
+  통신 환경이나 상황에 따라 5G와 LTE를 자동으로 오가는 스마트 데이터 모드 덕분에 배터리를 절약할 수 있는 것은 물론, 기기 자체에서 5G와 LTE 대역도 그 어느 때보다 다양하게 지원하기 때문에 그 모든 것을 세계 더 많은 곳에서 누릴 수 있죠.
+  </p>
+</li>
 ''',
     'Living':
 '''
-<ul class="descriptionList">
-  <li>
-    <h2>콘콘 플래너</h2>
-    <p class="productDescription">
-      계획을 쓰는 것 만으로도 실행율이 3배 이상 높아집니다.<br />
-      생각만 하고 있었던 계획들, 일단 써보세요.
-      콘콘 플래너와 함께 시작하세요.
-    </p>
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 1"
-      src="https://i.ibb.co/KDSfn38/Living-Books-Chunsam-1.png"
-      id="1"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 2"
-      src="https://i.ibb.co/KGn42Jn/Living-Books-Concon-2.png"
-      id="2"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 3"
-      src="https://i.ibb.co/bNfC4xM/001.png"
-      id="3"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 4"
-      src="https://i.ibb.co/W6jnkjW/Living-Books-Peach-3.png"
-      id="4"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 5"
-      src="https://i.ibb.co/tD02SvN/Living-Cup-Duckee-1.png"
-      id="5"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 6"
-      src="https://i.ibb.co/BCnv7tX/Living-Cup-Duckee-2.png"
-      id="6"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 7"
-      src="https://i.ibb.co/4gsyXbQ/Living-Cup-Duckee-3.png"
-      id="7"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 8"
-      src="https://i.ibb.co/XFkWXNs/group-Image.jpg"
-      id="8"
-    />
-  </li>
-  <li>
-    <h2>콘콘 플래너</h2>
-    <p class="productDescription">
-      계획을 세우고 성취를 반복하는 것은 <br />
-      강력한 동기부여가 됩니다. <br />
-      콘콘 플래너가 당신을 내일로 나아가게 하는 원동력이 될거에요.
-    </p>
-  </li>
-</ul>
+<li class="detailContentsList">
+  <h2>콘콘 플래너</h2>
+  <p class="productDescription">
+    계획을 쓰는 것 만으로도 실행율이 3배 이상 높아집니다.<br />
+  생각만 하고 있었던 계획들, 일단 써보세요.
+  콘콘 플래너와 함께 시작하세요.
+  </p>
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 1"
+    src="https://i.ibb.co/KDSfn38/Living-Books-Chunsam-1.png"
+    id="1"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 2"
+    src="https://i.ibb.co/KGn42Jn/Living-Books-Concon-2.png"
+    id="2"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 3"
+    src="https://i.ibb.co/TrbD93j/Living-Books-Duckee-1.png"
+    id="3"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 4"
+    src="https://i.ibb.co/W6jnkjW/Living-Books-Peach-3.png"
+    id="4"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 5"
+    src="https://i.ibb.co/tD02SvN/Living-Cup-Duckee-1.png"
+    id="5"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 6"
+    src="https://i.ibb.co/BCnv7tX/Living-Cup-Duckee-2.png"
+    id="6"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 7"
+    src="https://i.ibb.co/4gsyXbQ/Living-Cup-Duckee-3.png"
+    id="7"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 8"
+    src="https://i.ibb.co/XFkWXNs/group-Image.jpg"
+    id="8"
+  />
+</li>
+<li>
+  <h2>콘콘 플래너</h2>
+  <p class="productDescription">
+  계획을 세우고 성취를 반복하는 것은 <br />
+  강력한 동기부여가 됩니다. <br />
+  콘콘 플래너가 당신을 내일로 나아가게 하는 원동력이 될거에요.
+  </p>
+</li>
 ''',
     'Wear':
 '''
-<ul class="descriptionList">
-  <li>
-    <h2>콘콘 비니비니</h2>
-    <p class="productDescription">
-      포근하게 머리를 감싸주는 콘콘 숏 비니를 만나보세요. <br />
-      콘콘 비니는 머리에 꼭 맞는 둥근 모자입니다. <br />
-      항균 기능이 있어 쾌적하며, 표면이 깨끗하고 고른 외관의 소재로 만들었습니다. <br />
-      가볍고 부드러운 착용감을 제공합니다.
-    </p>
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 1"
-      src="https://i.ibb.co/hMvCBVY/Wear-Caps-Concon-3.png"
-      id="1"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 2"
-      src="https://i.ibb.co/mS3Xq66/Wear-Caps-Peach-1.png"
-      id="2"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 3"
-      src="https://i.ibb.co/mc0mjc8/Wear-Caps-Chunsam-3.png"
-      id="3"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 4"
-      src="https://i.ibb.co/SrwCV4R/Wear-Caps-Duckee-3.png"
-      id="4"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 5"
-      src="https://i.ibb.co/bJKTL28/Wear-Caps-Chunsam-0.png"
-      id="5"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 6"
-      src="https://i.ibb.co/PFnqhy7/Wear-Caps-Peach-2.png"
-      id="6"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 7"
-      src="https://i.ibb.co/ZYZ1wSq/Wear-Caps-Duckee-2.png"
-      id="7"
-    />
-  </li>
-  <li>
-    <img
-      class="desImg"
-      alt="상세이미지 8"
-      src="https://i.ibb.co/k22qjwb/group-Image.jpg"
-      id="8"
-    />
-  </li>
-  <li>
-    <h2>콘콘 비니비니</h2>
-    <p class="productDescription">
-      포근하게 머리를 감싸주는 콘콘 숏 비니를 만나보세요. <br />
-      콘콘 비니는 머리에 꼭 맞는 둥근 모자입니다. <br />
-      항균 기능이 있어 쾌적하며, 표면이 깨끗하고 고른 외관의 소재로 만들었습니다. <br />
-      가볍고 부드러운 착용감을 제공합니다.
-    </p>
-  </li>
-</ul>
+<li class="detailContentsList">
+  <h2>콘콘 비니비니</h2>
+  <p class="productDescription">
+    포근하게 머리를 감싸주는 콘콘 숏 비니를 만나보세요. <br />
+    콘콘 비니는 머리에 꼭 맞는 둥근 모자입니다. <br />
+    항균 기능이 있어 쾌적하며, 표면이 깨끗하고 고른 외관의 소재로 만들었습니다. <br />
+    가볍고 부드러운 착용감을 제공합니다.
+  </p>
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 1"
+    src="https://i.ibb.co/hMvCBVY/Wear-Caps-Concon-3.png"
+    id="1"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 2"
+    src="https://i.ibb.co/mS3Xq66/Wear-Caps-Peach-1.png"
+    id="2"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 3"
+    src="https://i.ibb.co/mc0mjc8/Wear-Caps-Chunsam-3.png"
+    id="3"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 4"
+    src="https://i.ibb.co/SrwCV4R/Wear-Caps-Duckee-3.png"
+    id="4"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 5"
+    src="https://i.ibb.co/bJKTL28/Wear-Caps-Chunsam-0.png"
+    id="5"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 6"
+    src="https://i.ibb.co/PFnqhy7/Wear-Caps-Peach-2.png"
+    id="6"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 7"
+    src="https://i.ibb.co/ZYZ1wSq/Wear-Caps-Duckee-2.png"
+    id="7"
+  />
+</li>
+<li>
+  <img
+    class="desImg"
+    alt="상세이미지 8"
+    src="https://i.ibb.co/k22qjwb/group-Image.jpg"
+    id="8"
+  />
+</li>
+<li>
+  <h2>콘콘 비니비니</h2>
+  <p class="productDescription">
+    포근하게 머리를 감싸주는 콘콘 숏 비니를 만나보세요. <br />
+    콘콘 비니는 머리에 꼭 맞는 둥근 모자입니다. <br />
+    항균 기능이 있어 쾌적하며, 표면이 깨끗하고 고른 외관의 소재로 만들었습니다. <br />
+    가볍고 부드러운 착용감을 제공합니다.
+  </p>
+</li>
 ''',
 }
