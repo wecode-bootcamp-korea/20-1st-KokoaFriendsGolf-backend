@@ -30,7 +30,7 @@ class OrderListView(View):
 
         for product_info in order_items:
             order_product = {
-                "order_id": product_info.order_id,
+                "order_id": product_info.id,
                 "date": '2020-05-20',
                 "name": product_info.product.name,
                 "quantity": product_info.quantity,
