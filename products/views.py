@@ -1,20 +1,13 @@
-<<<<<<< HEAD
-from django.views           import View
-from django.http.response   import JsonResponse
+from django.views            import View
+from django.http.response    import JsonResponse
+from django.utils.decorators import method_decorator
 
-from products.models        import (Category, 
+from products.models         import (Category, 
                                     SubCategory, 
                                     Product, 
                                     Character)
-from utils.utils            import get_name_list
-=======
-from django.http.response       import JsonResponse
-from django.views               import View
-from django.utils.decorators    import method_decorator
-
-from products.models            import Product
-from utils.decorators           import check_user, login_required
->>>>>>> main
+from utils.utils             import get_name_list
+from utils.decorators        import check_user, login_required
 
 class ProductListView(View):
     LIMIT_DEFAULT  = 16
