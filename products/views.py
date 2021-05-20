@@ -11,6 +11,7 @@ class ProductListView(View):
     LIMIT_DEFAULT  = 16
     OFFSET_DEFAULT = 0
 
+    @method_decorator(check_user())
     def get(self, request):
         order_by         = request.GET.get('orderBy', '-RECENT')
         cname            = request.GET.get('cname')
