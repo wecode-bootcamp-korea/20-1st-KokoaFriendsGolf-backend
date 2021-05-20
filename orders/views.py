@@ -57,7 +57,7 @@ class OrderListView(View):
                 "sum_total_discount"        : sum_total_discount,
                 "final_price"               : sum_total_discounted_price + 3000,
                 "shipping_fee"              : 3000,
-                "product_list"              : order_list,
+                "order_list"                : order_list,
                 "user_info"                 : {
                                                 "id"          : user.id,
                                                 "name"        : user.name,
