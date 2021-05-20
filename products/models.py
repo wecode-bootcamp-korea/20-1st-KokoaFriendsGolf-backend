@@ -60,8 +60,8 @@ class Product(models.Model):
         for excluded_keys in exclude:
             product_info.pop(excluded_keys)
         
-        return product_info
-
+        return product_info    
+    
 class ProductRelation(models.Model):
     reference       = models.ForeignKey('Product', related_name='reference', on_delete=models.CASCADE)
     related_product = models.ForeignKey('Product', related_name='related_products', on_delete=models.CASCADE)
