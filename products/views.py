@@ -16,7 +16,7 @@ class ProductListView(View):
         cname            = request.GET.get('cname')
         search           = request.GET.get('search')
         limit            = int(request.GET.get('limit')) if request.GET.get('limit') else None
-        offset           = int(request.GET.get('offset')) if request.GET.get('limit') else None
+        offset           = int(request.GET.get('offset')) if request.GET.get('offset') else None
         products         = Product.objects.none()
         all_product_name = get_name_list(Product)
         product_list     = []
@@ -60,7 +60,7 @@ class ProductListView(View):
         if order_by == '-LIKE':
             products = sorted(products, key = lambda product: product.like_users.count())
 
-        if limit and offset:
+        if (limit is not None) and (offset is not None):
             if len(products) > (offset+limit):
                 products = products[offset:offset+limit]
                 is_last_page = False
@@ -91,11 +91,11 @@ class ProductDetailView(View):
             is_liked = product.get_info(user=user)['is_liked']
 
             if is_liked:
-                product.like_users.get(user=user).delete()
+                product.like_users.remove(user)
             else:
-                product.like_users.add(user=user)
-            
-            return JsonResponse({'status': "SUCCESS", 'data':{'product': product.get_info(user=user, exclude=['contents'])}}, status=200)
+                product.like_users.add(user)
+
+            return JsonResponse({'status': "SUCCESS", 'message': f'is_liked changed to {product.get_info(user=user)["is_liked"]}'}, status=200)
 
         except Product.DoesNotExist:
             return JsonResponse({"status": "PRODUCT_NOT_FOUND", "message": "존재하지 않는 상품입니다."}, status=404)
