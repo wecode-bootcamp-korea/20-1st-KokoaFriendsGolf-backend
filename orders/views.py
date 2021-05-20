@@ -65,6 +65,43 @@ class OrderListView(View):
         except Product.DoesNotExist:
             return JsonResponse({"status": "INVALID_PRODUCT_ERROR", "message": f'Product id {product_id} does not exist'}, status=401)
 
+    @method_decorator(login_required())
+    def patch(self, request):
+        PATCHEABLE_ORDER_TYPE = ["PURCHASE_CART", "PURCHASED"]
+        
+        try:
+            data       = json.loads(request.body)
+            user       = request.user
+            order_type = data['order_type']
+
+            if order_type not in PATCHEABLE_ORDER_TYPE:
+                return JsonResponse({"status": "ORDER_TYPE_ERROR", "message": f'Order type should be one of {PATCHEABLE_ORDER_TYPE}'}, status=400)
+
+            self.init_order_types(PATCHEABLE_ORDER_TYPE)
+
+            user_order_list    = OrderList.objects.filter(order__user = user)
+            order_transit_list = OrderList.objects.none()
+
+            if order_type == 'PURCHASE_CART':
+                order_id_list      = data['order_id_list']
+                order_transit_list = user_order_list.filter(id__in = order_id_list)
+
+            if order_type == 'PURCHASED':
+                order_transit_list = user_order_list.filter(order__order_status__status__in = ["PURCHASE_CART", "PURCHASE_INSTANT"])
+
+            for order in order_transit_list:
+                order_info              = order.order
+                order_info.order_status = OrderStatus.objects.get(status = order_type)
+                order_info.save()
+            
+            return JsonResponse({"status": "SUCCESS", "data": {"order_list": self.get_order_info(order_type_list=[order_type], user=user)}}, status=200)
+
+        except KeyError as e:
+            return JsonResponse({"status": "KEY_ERROR", "message": f'Key Error in Field "{e.args[0]}"'}, status=400)
+
+        except JSONDecodeError as e: 
+            return JsonResponse({"status": "JSON_DECODE_ERROR", "message": e.msg}, status=400)
+
     def reset_orders(self, user):
         user_orders = OrderList.objects.filter(order__user = user)
 
