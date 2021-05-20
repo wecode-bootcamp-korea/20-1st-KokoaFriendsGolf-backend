@@ -32,7 +32,7 @@ class Product(models.Model):
     class Meta():
         db_table = 'products'
     
-    def get_info(self, exclude=[]):
+    def get_info(self, exclude=[], user=None):
         subcategory = SubCategory.objects.get(id=self.subcategory.id)
         category = subcategory.category
 
@@ -46,6 +46,7 @@ class Product(models.Model):
             "is_soldout"    : False if not self.is_soldout else True,
             "is_set"        : False if not self.is_set else True,
             "is_picked"     : False if not self.is_picked else True,
+            "is_liked"      : False if not user else self.like_users.filter(id=user.id).exists(),
             "counts_liked"  : self.like_users.count(),
             "contents"      : self.contents,
             "subcategory"   : subcategory.name,
