@@ -20,7 +20,7 @@ create database KokoaFriendsGolf character set utf8mb4 collate utf8mb4_general_c
 ### Setup Python Env & Run with Python
 ```shell
 # in project root
-mkdir -p ./data && cd ./data && curl -LJO --url https://gist.githubusercontent.com/JunsikChoi/d9b12949b7007b9d8a2bd958e0a8f0e7/raw/746786257b5173a97270622e0b46b89cc8b7a32b/mockup_data.py && cd ..
+mkdir -p ./data && cd ./data && curl -LJO --url https://gist.githubusercontent.com/JunsikChoi/d9b12949b7007b9d8a2bd958e0a8f0e7/raw/95e05009cd38033d2fe4e5583488469733861694/mockup_data.py && cd ..
 pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
