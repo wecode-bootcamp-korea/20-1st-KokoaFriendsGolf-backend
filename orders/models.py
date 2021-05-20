@@ -17,7 +17,7 @@ class Order(models.Model):
          db_table = 'orders'
 
 class OrderStatus(models.Model):
-     status = models.CharField(max_length=20)
+     status = models.CharField(max_length=20, unique=True)
 
      class Meta():
          db_table = 'order_status'
