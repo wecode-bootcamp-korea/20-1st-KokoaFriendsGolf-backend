@@ -31,6 +31,7 @@ class OrderListView(View):
         for product_info in order_items:
             order_product = {
                 "order_id"              : product_info.id,
+                "product_id"            : product_info.product.id,
                 "date"                  : product_info.order.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
                 "name"                  : product_info.product.name,
                 "quantity"              : product_info.quantity,
