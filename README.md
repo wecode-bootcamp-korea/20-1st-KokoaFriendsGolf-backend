@@ -243,11 +243,18 @@ python manage.py runserver 0.0.0.0:8000
 
 #### **팀원 별 구현 내역**
 #### 전현수
-- 'Example'
-    - FindIdView 기능 구현
-    - FindPasswordView 기능 구현
-    - ReviewView 기능 구현
-    - UserLikeView 기능 구현
+- `DB 모델링`
+  - 백엔드 팀원과 함께 Aquery tools 통해 필요한 관계형 DB 테이블 모델링
+
+- `Products API`
+  - Product List View 카테고리별 상품 분류 로직구현
+  - Product List View 가격순, 최신순 등 상품 정렬 로직구현
+  - Product List View 검색기능 로직구현
+  - Product List View 페이지네이션 로직구현
+ 
+- `Orders API`
+  - OrderListView GET 메서드 구현
+
 
 #### 최준식
 - `Fake Data 생성 및 DB Population 기능`
