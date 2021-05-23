@@ -1,25 +1,25 @@
 # Kokoa Friends Mart
-[카카오 프렌즈 골프]('https://www.kakaofriendsgolf.com') 클론 프로젝트
+[카카오 프렌즈 골프](https://www.kakaofriendsgolf.com) 클론 프로젝트
 ## 🖥 프로젝트 요약
 - 프로젝트 진행 기간: 2주일 (2021.05.10 ~ 2021.05.21)
-- 카카오VX의 골프 용품 전문 [KAKAO FRIENDS GOLF]('https://www.kakaofriendsgolf.com')을 프론트엔드(React.js), 백엔드(Django)를 기반으로 클론하는 프로젝트
+- 카카오VX의 골프 용품 전문 [KAKAO FRIENDS GOLF](https://www.kakaofriendsgolf.com)을 프론트엔드(React.js), 백엔드(Django)를 기반으로 클론하는 프로젝트
 - 클론 타겟 사이트의 구성과 틀은 가져오되, 카테고리를 Mart로 피보팅했으며 사용하는 캐릭터와 상품 내용은 직접 제작해 구성
 
 ### 프로젝트 팀 구성
 
 #### 프론트엔드
-- [박준모]('https://github.com/junmopark01')
-- [이지연]('https://github.com/Yonyas')
-- [조원영]('https://github.com/wychrischo')
-- [하연주]('https://github.com/yyeonjju')
+- [박준모](https://github.com/junmopark01)
+- [이지연](https://github.com/Yonyas)
+- [조원영](https://github.com/wychrischo)
+- [하연주](https://github.com/yyeonjju)
 #### 백엔드
-- [전현수]('https://github.com/jeonhs2482')
-- [최준식]('https://github.com/JunsikChoi')
+- [전현수](https://github.com/jeonhs2482)
+- [최준식](https://github.com/JunsikChoi)
 
 ---
 
 ## 🖥 프로젝트 상세 내용
-### 👩🏻‍💻 [프론트엔드]('https://github.com/wecode-bootcamp-korea/20-1st-KokoaFriendsMart-frontend')
+### 👩🏻‍💻 [프론트엔드](https://github.com/wecode-bootcamp-korea/20-1st-KokoaFriendsMart-frontend)
 
 #### **OverView**
 
@@ -71,7 +71,7 @@
     - 스크롤 시 Nav 바가 가려지는 시점부터 고정 기능
     - 전체 카테고리에 마우스 오버 시 서버로부터 받아온 카테고리 리스트 드롭다운
     - 전체 카테고리가 선택 되었을 시에만 서브 카테고리 조건부 렌더링
-### 👩🏻‍💻 [백엔드]('https://github.com/wecode-bootcamp-korea/20-1st-KokoaFriendsGolf-backend')
+### 👩🏻‍💻 [백엔드](https://github.com/wecode-bootcamp-korea/20-1st-KokoaFriendsGolf-backend)
 
 #### **OverView**
 
@@ -110,7 +110,7 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 #### 구현된 API 설명
-[KokoaFriendsMart API Documentation]('https://documenter.getpostman.com/view/13584119/TzRShToH')
+[KokoaFriendsMart API Documentation](https://documenter.getpostman.com/view/13584119/TzRShToH)
 ##### Users API
 
 **`POST /users/signup`**
@@ -142,7 +142,7 @@ python manage.py runserver 0.0.0.0:8000
   - `"status": "JSON_DECODE_ERROR"` : 잘못된 JSON 형식 입력
   - `"status": "KEY_ERROR"` : 키 이름 잘못 입력
   - `"status": "INVALID_USER_ERROR"` : 존재하지 않는 유저 또는 틀린 비밀번호 입력
-  - 
+  
 ##### Products API
 
 **`GET /products?cname=<category_or_character_name>&orderBy=<order_by>&offset=<offset>&limit=<limit>`**
@@ -298,6 +298,6 @@ python manage.py runserver 0.0.0.0:8000
 
 ## ✏️ References
 - 이 프로젝트는 카카오 프렌즈 골프를 참고하여 학습용으로 작업 되었습니다.
-- 이 프로젝트에서 사용된 이미지는 배포 가능한 캐릭터와 상품 이미지를 목업 제작용 사이트 [PlaceIt]('https://documenter.getpostman.com/view/13584119/TzRShToH')을 통해 제작되었습니다.
+- 이 프로젝트에서 사용된 이미지는 배포 가능한 캐릭터와 상품 이미지를 목업 제작용 사이트 [PlaceIt](https://documenter.getpostman.com/view/13584119/TzRShToH)을 통해 제작되었습니다.
 - 이 프로젝트에 쓰인 상품 정보 및 개인정보는 모두 파이썬 Faker 라이브러리를 통해 만들어진 허구의 것입니다.
 - 이 프로젝트의 소스 코드는 상업적으로 이용하실 수 없습니다.
